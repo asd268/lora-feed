@@ -24,7 +24,7 @@ Note: Please make sure that the musl library is updated in the file system.
 Edit your feeds.conf or feed.conf.default and add the following to it:
 
     # Semtech
-    src-git lora https://github.com/xueliu/lora-feed
+    src-git lora https://github.com/asd268/lora-feed
 
 Update your build environment and install the package:
 
