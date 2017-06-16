@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lora_gateway
-PKG_VERSION:=5.0.1
+PKG_VERSION:=3.1.0b
 PKG_RELEASE:=1
 
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/Lora-net/lora_gateway/archive/
-PKG_MD5SUM:=5d07f8471e1a67920787e3879afe0cb6
+PKG_SOURCE_URL:=https://github.com/asd268/lora_gateway/archive/
+#PKG_MD5SUM:=5d07f8471e1a67920787e3879afe0cb6
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -26,6 +26,7 @@ define Package/lora-gateway
 $(call Package/lora-gateway/Default)
   SECTION:=utils
   CATEGORY:=Utilities
+  DEPENDS:=libmpsse libftdi
 endef
 
 define Package/lora-gateway/description
