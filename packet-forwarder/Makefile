@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=packet-forwarder
-PKG_VERSION:=4.0.1
+PKG_VERSION:=2.1.0b
 PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/packet_forwarder-$(PKG_VERSION)
 PKG_SOURCE:=v$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/Lora-net/packet_forwarder/archive/
-PKG_MD5SUM:=a1f942e0cc7b02d604b11c8cb5f2a029
+PKG_SOURCE_URL:=https://github.com/asd268/packet_forwarder/archive/
+#PKG_MD5SUM:=a1f942e0cc7b02d604b11c8cb5f2a029
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -39,15 +39,18 @@ endef
 CFLAGS += $(FPIC) -O2 -Wall -Wextra -std=c99 -Iinc -I. -lm
 
 define Build/Compile
-	$(MAKE) CC=$(TARGET_CC) LGW_PATH=$(BUILD_DIR)/lora_gateway-5.0.1/libloragw -C $(PKG_BUILD_DIR)
+	$(MAKE) CC=$(TARGET_CC) LGW_PATH=$(BUILD_DIR)/lora_gateway-3.1.0b/libloragw -C $(PKG_BUILD_DIR)
 endef
 
 define Package/packet-forwarder/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/lora_pkt_fwd/lora_pkt_fwd $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/basic_pkt_fwd/basic_pkt_fwd $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/basic_pkt_fwd/global_conf.json $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/basic_pkt_fwd/local_conf.json $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/gps_pkt_fwd/gps_pkt_fwd $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/beacon_pkt_fwd/beacon_pkt_fwd $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/util_ack/util_ack $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/util_sink/util_sink $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/util_tx_test/util_tx_test $(1)/usr/bin
 endef
 
 $(eval $(call BuildPackage,packet-forwarder))
