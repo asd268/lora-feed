@@ -29,7 +29,7 @@ Edit your feeds.conf or feed.conf.default and add the following to it:
 Update your build environment and install the package:
 
     $ scripts/feeds update lora
-    $ scripts/feeds install lora
+    $ scripts/feeds install -a
     $ make menuconfig
 
 Go to Utilities, select lora-gateway and packet-forwarder;
